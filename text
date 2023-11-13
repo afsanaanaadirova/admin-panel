@@ -1,0 +1,27 @@
+1. filtering  
+?category=smartphones
+?category=smartphones&discount.type=shipping
+
+2.sorting
+?_sort=price&_order=desc //boyukden kichiye
+?_sort=price&_order=asc //kichiden boyuye
+
+?_sort=category  //category gore sorting, elifba sirasina gore
+
+3.pagination
+?_page=1  ilk 10 dene gelir
+?_page=1&_limit=2 
+
+4.
+?price_gte=1&price_lte=100(1 ve 100 arasindakilari getir)
+
+5.
+?id_ne=1 (id-si 1 olandan bashqalarini getir)
+?category_like=^s (s herifi ile bashlaynalari)
+?q=kl(hardaki sozlerin arasinds kl var)
+
+6. relation
+?_embed=categories (categories ile birge datalari getir)
+/1?_embed=categories (1ci-nin categories ile birge getir)
+/categories?_expand=product (categories(1) ona uygun olan product(2)ile birge getirir)
+/categories/4?_expand=product

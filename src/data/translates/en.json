@@ -1,0 +1,7 @@
+{
+    "rights": "All rights reserved",
+    "min_length": "Must be at least {{min}} characters",
+    "post_success": "Post added successfully",
+    "post_error": "Post doesn't added",
+    "add_post": "Add post"
+}

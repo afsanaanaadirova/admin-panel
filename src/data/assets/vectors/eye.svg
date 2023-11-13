@@ -1,0 +1,14 @@
+<!DOCTYPE xml>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.4561 13.9971L15.1217 17.7752" stroke="currentColor" stroke-width="2.3"
+        stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.53477 13.9873L8.86914 17.7748" stroke="currentColor" stroke-width="2.3"
+        stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18.8535 11.9346L21.0004 15.6377" stroke="currentColor" stroke-width="2.3"
+        stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M5.13711 11.9346L2.99023 15.6564" stroke="currentColor" stroke-width="2.3"
+        stroke-linecap="round" stroke-linejoin="round" />
+    <path
+        d="M3 9.83398C4.575 11.784 7.4625 14.2496 12 14.2496C16.5375 14.2496 19.425 11.784 21 9.83398"
+        stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
