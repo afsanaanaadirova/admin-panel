@@ -7,12 +7,19 @@ import { Controller, useForm } from "react-hook-form";
 import Option from "@/ui/shared/Select/Option";
 import { addProductSchema } from "@/data/schemas/formValidations/addProductSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddProduct } from "@/app/api/productApi";
+import {
+  useEditeProduct,
+  useProduct,
+} from "@/app/api/productApi";
 import { ProductDSO } from "@/data/dso/product.dso";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const AddProduct = () => {
   const { data: categoriesData } = useCategories();
-  const addProduct = useAddProduct();
+  const params = useParams();
+  const editproduct = useEditeProduct();
+  const { data } = useProduct(Number(params.productId));
 
   const {
     register,
@@ -25,9 +32,26 @@ const AddProduct = () => {
     resolver: zodResolver(addProductSchema),
   });
 
+  useEffect(() => {
+    if (data) {
+      reset({
+        name: data.name || "",
+        description: data.description || "",
+        category: data.category || "",
+        image: data.image || "",
+        price: data.price || 0,
+      });
+    }
+  }, [data, reset]);
+
   const submitHandler = async (data: ProductDSO) => {
+    const productData = {
+      id: data.id!,
+      product: data,
+    };
+
     const output = await trigger();
-    output && addProduct.mutate(data);
+    output && editproduct.mutate(productData);
     reset({ name: "", description: "", category: "", image: "", price: 0 });
   };
 
@@ -35,7 +59,7 @@ const AddProduct = () => {
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-8 text-3xl text-center">Add Product</h1>
+          <h1 className="mb-8 text-3xl text-center">Edit Product</h1>
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="mb-2">
               <Input
@@ -98,7 +122,7 @@ const AddProduct = () => {
             </div>
             <div className="flex justify-center mt-4">
               <Button variant={EButtonVariants.BORDERLINE}>
-                add
+               edit
               </Button>
             </div>
           </form>

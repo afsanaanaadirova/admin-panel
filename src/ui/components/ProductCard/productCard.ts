@@ -5,6 +5,5 @@ export type ProductCardType = {
     category:string;
     price:number;
     image:string;
-    // updateHandler: () => void;
     deleteHandler: () => void;
   };

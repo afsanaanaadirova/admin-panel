@@ -5,14 +5,11 @@ import Select from "@/ui/shared/Select";
 import Option from "@/ui/shared/Select/Option";
 import {
   useDeleteProduct,
-  useFilterPriceProducts,
+  useFilterProducts,
   useProducts,
 } from "@/app/api/productApi";
 import { ERequestState } from "@/data/enum/request_state.enum";
-import {
-  useCategories,
-  useFilterCategoryProducts,
-} from "@/app/api/categoryApi";
+import { useCategories } from "@/app/api/categoryApi";
 import Modal from "@/ui/shared/Modal";
 import Button from "@/ui/shared/Button";
 import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
@@ -21,13 +18,19 @@ const ProductsPage = () => {
   const { data: productsData, isLoading: productsLoading } = useProducts();
   const { data: categoriesData } = useCategories();
   const { data: filteredProductsData, mutate: filterProducts } =
-    useFilterPriceProducts();
-  const { data: filteredCategoryData, mutate: filterCategory } =
-    useFilterCategoryProducts();
+    useFilterProducts();
   const deleteproduct = useDeleteProduct();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [activeID, setActiveID] = useState<number>();
+  const [selectedPriceOrder, setSelectedPriceOrder] = useState<string>();
+  const [selectedCategory, setSelectedCategory] = useState<string>();
+
+  // const params = new URLSearchParams({
+  //   _sort: "price",
+  //   _order: selectedPriceOrder,
+  //   category: selectedCategory,
+  // });
 
   useUpdateEffect(() => {
     setModalVisible(false);
@@ -41,7 +44,6 @@ const ProductsPage = () => {
     { id: 1, name: "asc" },
     { id: 2, name: "desc" },
   ];
-  console.log(modalVisible);
 
   const requestState = useMemo(() => {
     if (productsLoading) return ERequestState.LOADING;
@@ -50,8 +52,7 @@ const ProductsPage = () => {
   }, [productsLoading, productsData]);
 
   const { control } = useForm();
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
+
   return (
     <div className="p-4">
       <h2 className="text-end">Products</h2>
@@ -67,7 +68,10 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(val) => {
                 onChange(val.id);
-                filterProducts(val.name);
+                filterProducts(
+                  `?_sort=price&_order=${val.name}${selectedCategory ? `&category=${selectedCategory}`:""}`
+                );
+                setSelectedPriceOrder(val.name);
               }}
             />
           )}
@@ -83,7 +87,10 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(selectedOption) => {
                 onChange(selectedOption.id);
-                filterCategory(selectedOption.name);
+                filterProducts(
+                  `?_sort=price&_order=${selectedPriceOrder}&category=${selectedOption.name}`
+                );
+                setSelectedCategory(selectedOption.name);
               }}
             />
           )}
@@ -92,23 +99,21 @@ const ProductsPage = () => {
       <div className="grid gap-x-8 gap-y-4 grid-cols-2">
         {requestState === ERequestState.EMPTY && <div>No Data</div>}
         {requestState === ERequestState.SUCCESS &&
-          (filteredCategoryData || filteredProductsData || productsData)?.map(
-            (product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                category={product.category}
-                price={product.price}
-                image={product.image}
-                deleteHandler={() => {
-                  setModalVisible(true);
-                 setActiveID(product.id);
-                }}
-              />
-            )
-          )}
+          (filteredProductsData || productsData)?.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              image={product.image}
+              deleteHandler={() => {
+                setModalVisible(true);
+                setActiveID(product.id);
+              }}
+            />
+          ))}
       </div>
       <Modal visible={modalVisible} setVisible={setModalVisible}>
         <div className="p-4">

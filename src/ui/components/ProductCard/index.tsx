@@ -1,6 +1,7 @@
 import { type ProductCardType } from "./productCard";
 import Button from "@/ui/shared/Button";
 import { EButtonVariants } from "@/data/enum/button.enum";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({
   id,
@@ -11,11 +12,16 @@ const ProductCard = ({
   image,
   deleteHandler,
 }: ProductCardType) => {
+ 
   return (
     <>
       <div className="grid grid-cols-[214px,1fr] border rounded">
         <div className="flex justify-center items-center border-r-2 w-[214px] p-2">
-          <img className="w-[150px] h-[150px] object-contain" src={image} alt="no photo" />
+          <img
+            className="w-[150px] h-[150px] object-contain"
+            src={image}
+            alt="no photo"
+          />
         </div>
         <div className="flex flex-col justify-between p-4">
           <div>
@@ -25,7 +31,11 @@ const ProductCard = ({
           <p className="py-4">{description}</p>
           <span className="pb-2">Price: {price}</span>
           <div className="flex gap-x-2">
-            <Button variant={EButtonVariants.BORDERLINE}>Edit</Button>
+           <Link to={id.toString()}>
+            <Button variant={EButtonVariants.BORDERLINE}>
+              Edit
+            </Button>
+            </Link>
             <Button
               variant={EButtonVariants.BORDERLINE}
               onClick={deleteHandler}

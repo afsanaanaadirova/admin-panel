@@ -26,7 +26,6 @@ const Input = ({
   useUpdateEffect(() => {
     isDebounce && setInnerValue(value || "");
   }, [value]);
-console.log(innerValue);
 
   return (
     <div className="w-full">

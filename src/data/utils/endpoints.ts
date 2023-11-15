@@ -4,6 +4,7 @@ export const endpoints = {
     products: (query: string = "") => `products/${query}`,
     product: (id: number) => `/products/${id}`,
     categories: (query: string = "") => `categories/${query}`,
+    category: (id: number) => `categories/${id}`,
     filterPriceProducts: (query:string ="") => `/products?_sort=price&_order=${query}`,
     productsFilterCategory: (query:string ="") => `/products?category=${query}`,
 }

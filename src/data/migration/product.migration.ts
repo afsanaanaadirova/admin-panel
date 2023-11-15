@@ -10,6 +10,6 @@ export const productMigration = (dto: ProductDTO):ProductModel  => {
     description:data.description,
     category:data.category,
     image:data.image,
-    price: data.price
+    price: data.price,
   }));
 };

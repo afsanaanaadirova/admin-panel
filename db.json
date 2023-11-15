@@ -1,18 +1,10 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 10009
-    },
-    {
       "id": 2,
       "name": "iPhone 11",
       "description": "An apple mobile which is nothing like apple",
-      "category": "smartphones",
+      "category": "apple",
       "image": "https://i.dummyjson.com/data/products/1/1.jpg",
       "price": 549,
       "discount": {
@@ -20,7 +12,7 @@
       }
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "iPhone 12",
       "description": "An apple mobile which is nothing like apple",
       "category": "apple",
@@ -31,117 +23,88 @@
       }
     },
     {
-      "id": 5,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 400,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 6,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 400,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 7,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 400,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 8,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 980,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 9,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 450,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 10,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 300,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 11,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 100,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "name": "ddddddddd",
-      "description": "ddddddddddd",
-      "category": "smartphones",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 11,
-      "id": 20
-    },
-    {
-      "name": "Prodcut 1",
-      "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
-      "category": "smartphones",
-      "price": 11,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 21
-    },
-    {
-      "name": "Afsana Nadirova",
+      "name": "Product1",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
       "price": 11,
       "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 22
+      "id": 4
+    },
+    {
+      "name": "Product1",
+      "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
+      "category": "smartphones",
+      "price": 110,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 5
+    },
+    {
+      "name": "test",
+      "description": "Test",
+      "category": "smartphones",
+      "price": 110,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 6
+    },
+    {
+      "name": "iPhone 11sa",
+      "description": "asasa",
+      "category": "apple",
+      "price": 1222,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 7
+    },
+    {
+      "name": "iPhone 11sa",
+      "description": "asasa",
+      "category": "apple",
+      "price": 1222,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 8
+    },
+    {
+      "name": "iPhone 11teze",
+      "description": "aaaaa",
+      "category": "apple",
+      "price": 12121,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 9
+    },
+    {
+      "name": "iPhone 11teze",
+      "description": "aaaaa",
+      "category": "apple",
+      "price": 12121,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 10
+    },
+    {
+      "name": "editiPhone 11",
+      "description": "An apple mobile which is nothing like apple",
+      "category": "apple",
+      "price": 54,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 11
+    },
+    {
+      "name": "editiPhone 11",
+      "description": "An apple mobile which is nothing like apple",
+      "category": "apple",
+      "price": 54,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 12
     }
   ],
   "categories": [
     {
       "id": 1,
-      "categoryName": "smartphones",
+      "categoryName": "apple",
       "productId": 2
     },
     {
       "id": 2,
-      "categoryName": "apple",
-      "productId": 1
+      "categoryName": "smartphones",
+      "productId": 2
     }
   ]
 }
