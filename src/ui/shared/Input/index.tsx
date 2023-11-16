@@ -45,12 +45,6 @@ const Input = ({
           value={value}
           className="w-full dark:bg-softBlack dark:text-white"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            const uploadedFile = e.target.files && e.target.files[0];
-            type === "file" ?  isDebounce
-            //@ts-ignore
-            ? setInnerValue(uploadedFile)
-            //@ts-ignore
-            : onChange?.(uploadedFile) :
             isDebounce
               ? setInnerValue(e.target.value)
               : onChange?.(e.target.value);

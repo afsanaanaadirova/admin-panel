@@ -8,6 +8,8 @@ import PostsPage from "@/ui/pages/posts/PostsPage";
 import AddProduct from "@/ui/pages/products/AddProduct";
 import PostDetailsPage from "@/ui/pages/posts/details/PostDetailsPage";
 import EditProduct from "@/ui/pages/products/EditProduct";
+import EditCategory from "@/ui/pages/category/EditCategory";
+import AddCategory from "@/ui/pages/category/AddCategory";
 
 const LoginPage = lazy(() => import("@/ui/pages/auth/LoginPage"));
 const ProductsPage = lazy(() => import("@/ui/pages/products/ProductsPage"));
@@ -71,7 +73,15 @@ const AppRoutes = () => {
                 {
                   index: true,
                   element: <CategoryPage />
-                }
+                },
+                {
+                  path: ":caregorytId",
+                  element: <EditCategory />
+                },
+                {
+                  path: "addCategory",
+                  element: <AddCategory />
+                },
               ]
             }
           ],

@@ -12,46 +12,40 @@ import {
   useProduct,
 } from "@/app/api/productApi";
 import { ProductDSO } from "@/data/dso/product.dso";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const { data: categoriesData } = useCategories();
   const params = useParams();
   const editproduct = useEditeProduct();
   const { data } = useProduct(Number(params.productId));
-
+  console.log(data);
+  
+  let navigate = useNavigate()
   const {
     register,
     handleSubmit,
     control,
-    trigger,
     reset,
     formState: { errors },
   } = useForm<ProductDSO>({
     resolver: zodResolver(addProductSchema),
+    values:{
+        name: data?.name || "",
+        description: data?.description || "",
+        category: data?.category || "",
+        image: data?.image || "",
+        price: data?.price || 0,
+    }
   });
 
-  useEffect(() => {
-    if (data) {
-      reset({
-        name: data.name || "",
-        description: data.description || "",
-        category: data.category || "",
-        image: data.image || "",
-        price: data.price || 0,
-      });
-    }
-  }, [data, reset]);
-
-  const submitHandler = async (data: ProductDSO) => {
+  const submitHandler = (data: ProductDSO) => {
     const productData = {
-      id: data.id!,
+      id: Number(params.productId),
       product: data,
     };
-
-    const output = await trigger();
-    output && editproduct.mutate(productData);
+    editproduct.mutate(productData);
+    data ? navigate('/products'):""
     reset({ name: "", description: "", category: "", image: "", price: 0 });
   };
 
@@ -121,7 +115,7 @@ const AddProduct = () => {
               )}
             </div>
             <div className="flex justify-center mt-4">
-              <Button variant={EButtonVariants.BORDERLINE}>
+              <Button type="submit" variant={EButtonVariants.BORDERLINE}>
                edit
               </Button>
             </div>
@@ -132,4 +126,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

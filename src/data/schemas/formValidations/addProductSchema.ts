@@ -5,7 +5,6 @@ export const addProductSchema = z.object({
   name: z.string().min(1, "Title field is required").min(5, "Min 5 characters"),
   description: z.string(),
   category: z.string(),
-  price: z.preprocess((a) => parseInt(z.string().parse(a),10),
-  z.number()),
+  price: z.coerce.number().positive(),
   image: z.string()
 });

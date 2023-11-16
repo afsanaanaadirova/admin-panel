@@ -14,11 +14,6 @@ export const getProductService = async (id: number) => {
   return productMigration(res.data);
 };
 
-export const filterPriceProductsService = (query: string ) =>{
-  return axiosInstance.get(endpoints.filterPriceProducts(query)).then(res =>{
-      return res.data.map(productMigration)
-  })
-}
 export const deleteProductService = async (id: number) => {
   const res = await axiosInstance.delete(endpoints.product(id));
   return res.data.products;

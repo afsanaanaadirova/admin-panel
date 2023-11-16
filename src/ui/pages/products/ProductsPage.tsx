@@ -14,6 +14,7 @@ import Modal from "@/ui/shared/Modal";
 import Button from "@/ui/shared/Button";
 import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
 
+
 const ProductsPage = () => {
   const { data: productsData, isLoading: productsLoading } = useProducts();
   const { data: categoriesData } = useCategories();
@@ -23,14 +24,25 @@ const ProductsPage = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [activeID, setActiveID] = useState<number>();
-  const [selectedPriceOrder, setSelectedPriceOrder] = useState<string>();
-  const [selectedCategory, setSelectedCategory] = useState<string>();
+  const [filter1, setFilter1] = useState('');
+  const [filter2, setFilter2] = useState('');
 
-  // const params = new URLSearchParams({
-  //   _sort: "price",
-  //   _order: selectedPriceOrder,
-  //   category: selectedCategory,
-  // });
+ 
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (filter1) {
+      params.set('_sort', 'price');
+      params.set('_order', filter1);
+    }
+
+    if (filter2) {
+      params.set('category', filter2);
+    }
+    filterProducts(params.toString());
+
+  }, [filter1, filter2]);
+
 
   useUpdateEffect(() => {
     setModalVisible(false);
@@ -56,6 +68,7 @@ const ProductsPage = () => {
   return (
     <div className="p-4">
       <h2 className="text-end">Products</h2>
+ 
       <div className="flex gap-x-4 mb-6">
         <Controller
           control={control}
@@ -68,10 +81,7 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(val) => {
                 onChange(val.id);
-                filterProducts(
-                  `?_sort=price&_order=${val.name}${selectedCategory ? `&category=${selectedCategory}`:""}`
-                );
-                setSelectedPriceOrder(val.name);
+                setFilter1(val.name)
               }}
             />
           )}
@@ -87,10 +97,8 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(selectedOption) => {
                 onChange(selectedOption.id);
-                filterProducts(
-                  `?_sort=price&_order=${selectedPriceOrder}&category=${selectedOption.name}`
-                );
-                setSelectedCategory(selectedOption.name);
+                setFilter2(selectedOption.name)
+                filterProducts(selectedOption.name)
               }}
             />
           )}

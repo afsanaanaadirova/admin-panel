@@ -9,11 +9,13 @@ import { addProductSchema } from "@/data/schemas/formValidations/addProductSchem
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddProduct } from "@/app/api/productApi";
 import { ProductDSO } from "@/data/dso/product.dso";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AddProduct = () => {
   const { data: categoriesData } = useCategories();
   const addProduct = useAddProduct();
-
+  let navigate = useNavigate()
+  
   const {
     register,
     handleSubmit,
@@ -28,9 +30,11 @@ const AddProduct = () => {
   const submitHandler = async (data: ProductDSO) => {
     const output = await trigger();
     output && addProduct.mutate(data);
+    data ? navigate('/products'):""
     reset({ name: "", description: "", category: "", image: "", price: 0 });
   };
 
+  
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

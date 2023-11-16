@@ -1,36 +1,6 @@
 {
   "products": [
     {
-      "id": 2,
-      "name": "iPhone 11",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 549,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "id": 3,
-      "name": "iPhone 12",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "price": 400,
-      "discount": {
-        "type": "shipping"
-      }
-    },
-    {
-      "name": "Product1",
-      "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
-      "category": "smartphones",
-      "price": 11,
-      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 4
-    },
-    {
       "name": "Product1",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
@@ -93,18 +63,24 @@
       "price": 54,
       "image": "https://i.dummyjson.com/data/products/1/1.jpg",
       "id": 12
+    },
+    {
+      "name": "qqqqqq",
+      "description": "qqqqqqq",
+      "category": "apple",
+      "price": 11111,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 13
     }
   ],
   "categories": [
     {
-      "id": 1,
-      "categoryName": "apple",
-      "productId": 2
+      "categoryName": "smartphones",
+      "id": 2
     },
     {
-      "id": 2,
-      "categoryName": "smartphones",
-      "productId": 2
+      "categoryName": "sasasasa",
+      "id": 3
     }
   ]
 }
