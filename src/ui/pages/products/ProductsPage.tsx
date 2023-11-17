@@ -24,24 +24,24 @@ const ProductsPage = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [activeID, setActiveID] = useState<number>();
-  const [filter1, setFilter1] = useState('');
-  const [filter2, setFilter2] = useState('');
+  const [filterPrice, setFilterPrice] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
 
  
   useEffect(() => {
     const params = new URLSearchParams();
 
-    if (filter1) {
+    if (filterPrice) {
       params.set('_sort', 'price');
-      params.set('_order', filter1);
+      params.set('_order', filterPrice);
     }
 
-    if (filter2) {
-      params.set('category', filter2);
+    if (filterCategory) {
+      params.set('category', filterCategory);
     }
     filterProducts(params.toString());
 
-  }, [filter1, filter2]);
+  }, [filterPrice, filterCategory]);
 
 
   useUpdateEffect(() => {
@@ -81,7 +81,7 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(val) => {
                 onChange(val.id);
-                setFilter1(val.name)
+                setFilterPrice(val.name)
               }}
             />
           )}
@@ -97,7 +97,7 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(selectedOption) => {
                 onChange(selectedOption.id);
-                setFilter2(selectedOption.name)
+                setFilterCategory(selectedOption.name)
                 filterProducts(selectedOption.name)
               }}
             />

@@ -1,13 +1,12 @@
-import { useCategories, useDeleteProduct } from "@/app/api/categoryApi";
+import { useCategories, useDeleteCategory } from "@/app/api/categoryApi";
 import CategoryCard from "@/ui/components/CategoryCard";
 
 function CategoryPage() {
   const { data: categoriesData } = useCategories();
-  const deleteproduct = useDeleteProduct();
- console.log(categoriesData);
+  const deleteCategory = useDeleteCategory();
  
   const deleteHandler = (id: number) => {
-    deleteproduct.mutate(id);
+    deleteCategory.mutate(id);
   };
   return (
     <div className="p-[20px]">
@@ -17,7 +16,8 @@ function CategoryPage() {
           <CategoryCard
             id={category.id}
             key={category.id}
-            categoryName={category.name}
+            name={category.name}
+            productId={category.productId}
             deleteHandler={() => {
               deleteHandler(category.id);
             }}

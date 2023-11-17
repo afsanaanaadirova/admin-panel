@@ -1,6 +1,6 @@
 export type CategoryCardType = {
     id?: number;
-    categoryName: string,
+    name: string,
     productId?: number
     deleteHandler?:()=>void
   };

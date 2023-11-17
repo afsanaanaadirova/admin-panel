@@ -25,9 +25,10 @@ export const useCategory = (id: number) => {
   });
 };
 
-export const useDeleteProduct = () => {
+export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+  
   return useMutation({
     mutationFn: (id: number) => {
       return category_repository.deleteCategory(id);
@@ -36,30 +37,34 @@ export const useDeleteProduct = () => {
       await queryClient.cancelQueries({
         queryKey: [ERevalidateTags.CATEGORIES],
       });
-      const previousProducts = queryClient.getQueryData([
+      
+      const previousCategories = queryClient.getQueryData([
         ERevalidateTags.CATEGORIES,
       ]);
+
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
-        (old: CategoryModel[]) => old.filter((d) => d.id !== id)
+        (old: CategoryModel[]) => old.filter((category) => category.id !== id),
       );
-      return { previousProducts };
+      
+      return { previousCategories };
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("product cant deleted")));
+      dispatch(errorToast(i18n.t("category cant deleted")));
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
-        context?.previousProducts
+        context?.previousCategories
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("product deleted")));
+      dispatch(successToast(i18n.t("category deleted")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
     },
   });
 };
+
 
 export const useEditCategory = () => {
   const dispatch = useAppDispatch();
@@ -83,28 +88,28 @@ export const useAddCategory = () => {
       return category_repository.addCategory(category);
     },
     onMutate: async (category: CategoryDSO)  => {
-      await queryClient.cancelQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
-      const previousProducts =
-        queryClient.getQueryData<CategoryModel[]>([ERevalidateTags.PRODUCTS]) ||
+      await queryClient.cancelQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
+      const previousCategories =
+        queryClient.getQueryData<CategoryModel[]>([ERevalidateTags.CATEGORIES]) ||
         [];
       queryClient.setQueryData(
-        [ERevalidateTags.PRODUCTS],
+        [ERevalidateTags.CATEGORIES],
         (prev: CategoryModel[]) => [{ id: 1234, ...category }, ...prev]
       );
-      return { previousProducts };
+      return { previousCategories };
     },
     onError: (_error, _variables, context) => {
       dispatch(errorToast(i18n.t("post_error")));
       queryClient.setQueryData(
-        [ERevalidateTags.PRODUCTS],
-        context?.previousProducts || []
+        [ERevalidateTags.CATEGORIES],
+        context?.previousCategories || []
       );
     },
     onSuccess: (_data, _variables) => {
       dispatch(successToast(i18n.t("post_success")));
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
+      queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
     },
   });
 };

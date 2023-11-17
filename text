@@ -23,5 +23,5 @@
 6. relation
 ?_embed=categories (categories ile birge datalari getir)
 /1?_embed=categories (1ci-nin categories ile birge getir)
-/categories?_expand=product (categories(1) ona uygun olan product(2)ile birge getirir)
+/categories?_embed=product (categories(1) ona uygun olan product(2)ile birge getirir)
 /categories/4?_expand=product

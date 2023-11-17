@@ -1,86 +1,45 @@
 {
   "products": [
     {
-      "name": "Product1",
+      "name": "test-sil",
+      "description": "Test",
+      "category": "apple",
+      "price": 110,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 2
+    },
+    {
+      "name": "iPhone 11sa",
+      "description": "asasa",
+      "category": "test",
+      "price": 1222,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 3
+    },
+    {
+      "name": "Afsana Nadirova",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
-      "price": 110,
-      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 5
-    },
-    {
-      "name": "test",
-      "description": "Test",
-      "category": "smartphones",
-      "price": 110,
-      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 6
-    },
-    {
-      "name": "iPhone 11sa",
-      "description": "asasa",
-      "category": "apple",
-      "price": 1222,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 7
-    },
-    {
-      "name": "iPhone 11sa",
-      "description": "asasa",
-      "category": "apple",
-      "price": 1222,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 8
-    },
-    {
-      "name": "iPhone 11teze",
-      "description": "aaaaa",
-      "category": "apple",
-      "price": 12121,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 9
-    },
-    {
-      "name": "iPhone 11teze",
-      "description": "aaaaa",
-      "category": "apple",
-      "price": 12121,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 10
-    },
-    {
-      "name": "editiPhone 11",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "price": 54,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 11
-    },
-    {
-      "name": "editiPhone 11",
-      "description": "An apple mobile which is nothing like apple",
-      "category": "apple",
-      "price": 54,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 12
-    },
-    {
-      "name": "qqqqqq",
-      "description": "qqqqqqq",
-      "category": "apple",
-      "price": 11111,
-      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 13
+      "price": 43434,
+      "image": "",
+      "id": 4
     }
   ],
   "categories": [
     {
       "categoryName": "smartphones",
-      "id": 2
+      "productId": 2,
+      "id": 1
     },
     {
-      "categoryName": "sasasasa",
-      "id": 3
+      "id": 2,
+      "categoryName": "apple",
+      "productId": 2
+    },
+    {
+      "id": 3,
+      "categoryName": "test",
+      "productId": 3
     }
   ]
 }

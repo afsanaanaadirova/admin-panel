@@ -7,5 +7,6 @@ export const categoryMigration = (dto: CategoryDTO): CategoryModel => {
   return migrator(dto, categorySchema, (data) => ({
     id: data.id,
     name:data.categoryName,
+    productId:data.productId
   }));
 };

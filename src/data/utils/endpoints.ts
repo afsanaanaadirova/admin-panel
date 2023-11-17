@@ -5,5 +5,6 @@ export const endpoints = {
     product: (id: number) => `/products/${id}`,
     categories: (query: string = "") => `categories/${query}`,
     category: (id: number) => `/categories/${id}`,
+    // category: (id: number) => `/categories/${id}?_expand=product`,
 }
 
