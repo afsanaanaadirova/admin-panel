@@ -13,7 +13,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="py-8 px-4 border border-[#a2bad7] min-h-screen">
+    <div className="py-8 px-4 border-r-2 border-r-indigo-100 min-h-screen">
       <ul className="flex flex-col gap-y-4">
         <Select
           data={selectCategoryData}

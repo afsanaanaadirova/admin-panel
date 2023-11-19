@@ -1,5 +1,3 @@
-import { type PostDSO } from "@/data/dso/post.dso";
-import post_repository from "@/app/repositories/implementation/post_repository";
 import { ERevalidateTags } from "@/data/enum/revalidate_tags.enum";
 import i18n from "@/app/lib/i18next.config";
 import { useAppDispatch } from "@/app/hooks/useRedux";
@@ -66,7 +64,7 @@ export const useDeleteProduct = () => {
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("product deleted")));
+      dispatch(successToast(i18n.t("product_remove")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
@@ -82,7 +80,7 @@ export const useEditeProduct = () => {
     },
     onSuccess: (data) => {
       console.log(data);
-      dispatch(successToast(i18n.t("post_update")));
+      dispatch(successToast(i18n.t("product_update")));
     },
   });
 };
@@ -107,14 +105,14 @@ export const useAddProduct = () => {
       return { previousProducts };
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("post_error")));
+      dispatch(errorToast(i18n.t("product_error")));
       queryClient.setQueryData(
         [ERevalidateTags.PRODUCTS],
         context?.previousProducts || []
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("post_success")));
+      dispatch(successToast(i18n.t("product_success")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.PRODUCTS] });

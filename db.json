@@ -1,45 +1,58 @@
 {
   "products": [
     {
-      "name": "test-sil",
-      "description": "Test",
+      "name": "iPhone 24",
+      "description": "no money",
       "category": "apple",
-      "price": 110,
-      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "price": 10,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 1
+    },
+    {
+      "name": "iPhone 19",
+      "description": "no money",
+      "category": "apple",
+      "price": 80000,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
       "id": 2
     },
     {
-      "name": "iPhone 11sa",
-      "description": "asasa",
-      "category": "test",
-      "price": 1222,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 3
-    },
-    {
-      "name": "Afsana Nadirova",
+      "name": "Samsung",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
       "price": 43434,
-      "image": "",
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
       "id": 4
+    },
+    {
+      "name": "Samsung",
+      "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
+      "category": "smartphones",
+      "price": 43,
+      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
+      "id": 5
+    },
+    {
+      "name": "iPhone 10",
+      "description": "",
+      "category": "apple",
+      "price": 89,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 6
     }
   ],
   "categories": [
     {
       "categoryName": "smartphones",
-      "productId": 2,
       "id": 1
     },
     {
       "id": 2,
-      "categoryName": "apple",
-      "productId": 2
+      "categoryName": "apple"
     },
     {
-      "id": 3,
-      "categoryName": "test",
-      "productId": 3
+      "categoryName": "tests",
+      "id": 5
     }
   ]
 }

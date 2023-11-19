@@ -57,7 +57,7 @@ export const useDeleteCategory = () => {
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("category deleted")));
+      dispatch(successToast(i18n.t("category_remove")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
@@ -67,6 +67,7 @@ export const useDeleteCategory = () => {
 
 
 export const useEditCategory = () => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
   return useMutation({
     mutationFn: ({ id, category }: { id: number; category: CategoryDSO }) => {
@@ -74,7 +75,10 @@ export const useEditCategory = () => {
     },
     onSuccess: (data) => {
       console.log(data);
-      dispatch(successToast(i18n.t("post_update")));
+      dispatch(successToast(i18n.t("category_update")));
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
     },
   });
 };
@@ -99,14 +103,14 @@ export const useAddCategory = () => {
       return { previousCategories };
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("post_error")));
+      dispatch(errorToast(i18n.t("category_error")));
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
         context?.previousCategories || []
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("post_success")));
+      dispatch(successToast(i18n.t("category_success")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });

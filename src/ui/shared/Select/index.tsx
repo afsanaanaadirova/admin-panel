@@ -38,7 +38,7 @@ const Select = ({
               <Listbox.Button
                 className={[
                   "relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm",
-                  Boolean(error) ? "border border-red" : "",
+                  Boolean(error) ? "border border-indigo-500/100" : "",
                 ].join(" ")}
               >
                 <span className="block truncate">{innerValue?.name || "Seçin"}</span>
@@ -48,7 +48,7 @@ const Select = ({
                     open ? "-rotate-0" : "rotate-180",
                   ].join(" ")}
                 >
-                  <UpChevronSVG className="w-3 h-3 text-red" />
+                  <UpChevronSVG className="w-3 h-3 text-blue" />
                 </span>
               </Listbox.Button>
               <Transition

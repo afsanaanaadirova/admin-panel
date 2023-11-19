@@ -1,13 +1,12 @@
-import { useAddCategory, useCategories } from "@/app/api/categoryApi";
+import { useAddCategory } from "@/app/api/categoryApi";
 import { EButtonVariants } from "@/data/enum/button.enum";
 import Button from "@/ui/shared/Button";
 import Input from "@/ui/shared/Input";
-import Select from "@/ui/shared/Select";
 import {  useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate} from "react-router-dom";
 import { CategoryDSO } from "@/data/dso/category.dos";
-import { addCategorySchema } from "@/data/schemas/formValidations/addCategorySchema";
+import { useProducts } from "@/app/api/productApi";
 
 const AddCategory = () => {
   const addCategory= useAddCategory();
@@ -16,19 +15,13 @@ const AddCategory = () => {
   const {
     register,
     handleSubmit,
-    trigger,
     reset,
     formState: { errors },
-  } = useForm<CategoryDSO>({
-    resolver: zodResolver(addCategorySchema),
-  });
+  } = useForm<CategoryDSO>();
 
   const submitHandler = async (data: CategoryDSO) => {
-    const output = await trigger();
-    console.log(data);
-    
-    output && addCategory.mutate(data);
-    // data ? navigate('/categories'):""
+    addCategory.mutate(data);
+    data ? navigate('/categories'):""
     reset({ categoryName:"" });
   };
 
@@ -48,7 +41,6 @@ const AddCategory = () => {
                 register={register}
               />
             </div>
-           
             <div className="flex justify-center mt-4">
               <Button variant={EButtonVariants.BORDERLINE}>
                 add

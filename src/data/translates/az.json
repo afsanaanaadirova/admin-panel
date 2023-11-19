@@ -1,7 +1,14 @@
 {
     "rights": "Bütün hüquqlar qorunur",
     "min_length": "Ən azı {{min}} simvol olmalıdır",
-    "post_success": "Post uğurla əlavə edildi",
-    "post_error": "Post əlavə edilmədi",
-    "add_post": "Post əlavə et"
+    "product_success": "Product uğurla əlavə edildi",
+    "product_error": "Product əlavə edilmədi",
+    "product_update":"Product yenilendi",
+    "add_product": "Product əlavə et",
+    "no_remove":"Bu adli kateqoriyada product oldugu ucun siline bilmez",
+    "product_remove":"Ugurla silindi",
+    "category_update":"Kateqori yenilendi",
+    "category_error":"Kateqori əlavə edilmədi",
+    "category_success":"Kateqori uğurla əlavə edildi",
+    "category_remove":"Kateqori ugurla silindi"
 }

@@ -27,6 +27,7 @@ const ProductsPage = () => {
   const [filterPrice, setFilterPrice] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
 
+ console.log(productsData);
  
   useEffect(() => {
     const params = new URLSearchParams();
@@ -124,9 +125,9 @@ const ProductsPage = () => {
           ))}
       </div>
       <Modal visible={modalVisible} setVisible={setModalVisible}>
-        <div className="p-4">
-          <p>Silmek istediyinizden eminsiz ?</p>
-          <Button onClick={() => deleteHandler(activeID!)}>Sil</Button>
+        <div className="p-16">
+          <p className="pb-2">Silmek istediyinizden eminsiz ?</p>
+          <Button onClick={() => deleteHandler(activeID!)} className="float-right">Sil</Button>
         </div>
       </Modal>
     </div>

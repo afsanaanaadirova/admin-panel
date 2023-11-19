@@ -27,6 +27,6 @@ export const deleteCategoryService = async (id: number) => {
 
 export const editCategoryService = (id: number,category:CategoryDSO) => {
   return axiosInstance.put(endpoints.category(id),category).then(res => {
-      return console.log(res.data);
+      return res.data;
   })
 }

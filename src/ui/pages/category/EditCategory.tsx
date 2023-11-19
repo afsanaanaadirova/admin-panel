@@ -22,7 +22,6 @@ const AddProduct = () => {
     resolver: zodResolver(addCategorySchema),
     values:{
         categoryName: data?.name || "",
-        productId:data?.productId || 0
     }
   });
 
@@ -32,7 +31,7 @@ const AddProduct = () => {
       category: data,
     };
     editCategory.mutate(categoryData)
-    // data ? navigate("/categories") : "";
+    data ? navigate("/categories") : "";
   };
 
   return (
