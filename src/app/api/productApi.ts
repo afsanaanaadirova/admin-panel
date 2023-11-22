@@ -6,10 +6,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import product_repository from "../repositories/implementation/product_repository";
 import { ProductModel } from "@/data/model/product.model";
 import { ProductDSO } from "@/data/dso/product.dso";
+import { mutate } from '../helpers/mutate'
 
 export const useProducts = (query: string = "") => {
   return useQuery({
-    queryKey: [ERevalidateTags.PRODUCTS],
+    queryKey: [ERevalidateTags.PRODUCTS,query],
     queryFn: () => {
       return product_repository.getProducts(query);
     },
@@ -24,20 +25,7 @@ export const useProduct = (id: number) => {
     },
   });
 };
-export const useFilterProducts = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (query: string) => {
-      return product_repository.getProducts(query);
-    },
-    onSuccess: (data, variables) => {
-      console.log(data, variables);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
-    },
-  });
-};
+
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -73,6 +61,7 @@ export const useDeleteProduct = () => {
 };
 
 export const useEditeProduct = () => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
   return useMutation({
     mutationFn: ({ id, product }: { id: number; product: ProductDSO }) => {
@@ -81,6 +70,9 @@ export const useEditeProduct = () => {
     onSuccess: (data) => {
       console.log(data);
       dispatch(successToast(i18n.t("product_update")));
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
     },
   });
 };
@@ -94,22 +86,20 @@ export const useAddProduct = () => {
       return product_repository.addProduct(product);
     },
     onMutate: async (product: ProductDSO) => {
-      await queryClient.cancelQueries({ queryKey: [ERevalidateTags.PRODUCTS] });
-      const previousProducts =
-        queryClient.getQueryData<ProductModel[]>([ERevalidateTags.PRODUCTS]) ||
-        [];
-      queryClient.setQueryData(
-        [ERevalidateTags.PRODUCTS],
-        (prev: ProductModel[]) => [{ id: 1234, ...product }, ...prev]
-      );
-      return { previousProducts };
+      return mutate<ProductModel[]>({
+        queryClient,
+        queryKey: [ERevalidateTags.PRODUCTS],
+        // updateFunction: (old) => [{id: 123, ...product}, ...old] as ProductModel[],
+        updateFunction: (old) => {
+          const newArray = Array.isArray(old) ? old : [];
+          console.log(newArray);
+          return [{ id: 123, ...product }, ...newArray] as ProductModel[];
+        },
+      });
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("product_error")));
-      queryClient.setQueryData(
-        [ERevalidateTags.PRODUCTS],
-        context?.previousProducts || []
-      );
+      dispatch(errorToast(i18n.t("product_error")))
+      queryClient.setQueryData([ERevalidateTags.PRODUCTS], context?.previousData)
     },
     onSuccess: (_data, _variables) => {
       dispatch(successToast(i18n.t("product_success")));

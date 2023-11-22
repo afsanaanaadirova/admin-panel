@@ -3,29 +3,30 @@ import { EButtonVariants } from "@/data/enum/button.enum";
 import Button from "@/ui/shared/Button";
 import Input from "@/ui/shared/Input";
 import {  useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate} from "react-router-dom";
 import { CategoryDSO } from "@/data/dso/category.dos";
-import { useProducts } from "@/app/api/productApi";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addCategorySchema } from "@/data/schemas/formValidations/addCategorySchema";
+import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
 
 const AddCategory = () => {
-  const addCategory= useAddCategory();
+  const { mutate,isSuccess } = useAddCategory();;
   let navigate = useNavigate()
   
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<CategoryDSO>();
+  } = useForm<CategoryDSO>({
+    resolver: zodResolver(addCategorySchema),
+  });
 
-  const submitHandler = async (data: CategoryDSO) => {
-    addCategory.mutate(data);
-    data ? navigate('/categories'):""
-    reset({ categoryName:"" });
-  };
+const submitHandler = async (data: CategoryDSO) => {
+  await mutate(data);
+  navigate('/categories')
+};
 
-  
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -54,3 +55,7 @@ const AddCategory = () => {
 };
 
 export default AddCategory;
+function trigger() {
+  throw new Error("Function not implemented.");
+}
+

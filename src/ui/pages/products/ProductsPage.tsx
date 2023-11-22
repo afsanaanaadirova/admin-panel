@@ -1,50 +1,57 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ProductCard from "@/ui/components/ProductCard";
 import { Controller, useForm } from "react-hook-form";
 import Select from "@/ui/shared/Select";
 import Option from "@/ui/shared/Select/Option";
-import {
-  useDeleteProduct,
-  useFilterProducts,
-  useProducts,
-} from "@/app/api/productApi";
+import { useDeleteProduct, useProducts } from "@/app/api/productApi";
 import { ERequestState } from "@/data/enum/request_state.enum";
 import { useCategories } from "@/app/api/categoryApi";
 import Modal from "@/ui/shared/Modal";
 import Button from "@/ui/shared/Button";
 import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
-
+import Pagination from "@/ui/components/Pagination";
 
 const ProductsPage = () => {
-  const { data: productsData, isLoading: productsLoading } = useProducts();
+  const [all, setAll] = useState("");
+  const { data: productsData, isLoading: productsLoading } = useProducts(all);
+
   const { data: categoriesData } = useCategories();
-  const { data: filteredProductsData, mutate: filterProducts } =
-    useFilterProducts();
   const deleteproduct = useDeleteProduct();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [activeID, setActiveID] = useState<number>();
-  const [filterPrice, setFilterPrice] = useState('');
-  const [filterCategory, setFilterCategory] = useState('');
+  const [filterPrice, setFilterPrice] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
 
- console.log(productsData);
- 
-  useEffect(() => {
+  //pagination
+  const [curretPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
+  const lastIndex = curretPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = productsData?.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(
+    (productsData ? productsData?.length : 2) / recordsPerPage
+  );
+  function changeCPage(id: any): void {
+    setCurrentPage(id);
+  }
+
+  //filter
+  useUpdateEffect(() => {
     const params = new URLSearchParams();
 
     if (filterPrice) {
-      params.set('_sort', 'price');
-      params.set('_order', filterPrice);
+      params.set("_sort", "price");
+      params.set("_order", filterPrice);
     }
 
     if (filterCategory) {
-      params.set('category', filterCategory);
+      params.set("category", filterCategory);
     }
-    filterProducts(params.toString());
-
+    setAll(params.toString());
   }, [filterPrice, filterCategory]);
 
-
+  
   useUpdateEffect(() => {
     setModalVisible(false);
   }, [deleteproduct.isSuccess]);
@@ -69,7 +76,7 @@ const ProductsPage = () => {
   return (
     <div className="p-4">
       <h2 className="text-end">Products</h2>
- 
+
       <div className="flex gap-x-4 mb-6">
         <Controller
           control={control}
@@ -82,7 +89,7 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(val) => {
                 onChange(val.id);
-                setFilterPrice(val.name)
+                setFilterPrice(val.name);
               }}
             />
           )}
@@ -98,8 +105,7 @@ const ProductsPage = () => {
               option={(val) => <Option value={val}>{val.name}</Option>}
               onChange={(selectedOption) => {
                 onChange(selectedOption.id);
-                setFilterCategory(selectedOption.name)
-                filterProducts(selectedOption.name)
+                setFilterCategory(selectedOption.name);
               }}
             />
           )}
@@ -108,7 +114,7 @@ const ProductsPage = () => {
       <div className="grid gap-x-8 gap-y-4 grid-cols-2">
         {requestState === ERequestState.EMPTY && <div>No Data</div>}
         {requestState === ERequestState.SUCCESS &&
-          (filteredProductsData || productsData)?.map((product) => (
+          records?.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -124,10 +130,20 @@ const ProductsPage = () => {
             />
           ))}
       </div>
+      <Pagination
+        currentPage={curretPage}
+        totalPages={npage}
+        onPageChange={changeCPage}
+      />
       <Modal visible={modalVisible} setVisible={setModalVisible}>
         <div className="p-16">
           <p className="pb-2">Silmek istediyinizden eminsiz ?</p>
-          <Button onClick={() => deleteHandler(activeID!)} className="float-right">Sil</Button>
+          <Button
+            onClick={() => deleteHandler(activeID!)}
+            className="float-right"
+          >
+            Sil
+          </Button>
         </div>
       </Modal>
     </div>

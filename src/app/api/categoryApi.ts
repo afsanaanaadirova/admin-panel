@@ -6,6 +6,7 @@ import { errorToast, successToast } from "../store/root/toastSlice";
 import i18n from "../lib/i18next.config";
 import { CategoryModel } from "@/data/model/category.mode";
 import { CategoryDSO } from "@/data/dso/category.dos";
+import { mutate } from "../helpers/mutate";
 
 export const useCategories = (query: string = "") => {
   return useQuery({
@@ -18,53 +19,48 @@ export const useCategories = (query: string = "") => {
 
 export const useCategory = (id: number) => {
   return useQuery({
-    queryKey: [ERevalidateTags.CATEGORIES],
+    queryKey: [ERevalidateTags.CATEGORY],
     queryFn: () => {
       return category_repository.getCategory(id);
     },
   });
 };
 
-export const useDeleteCategory = () => {
+export const useAddCategory = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  
-  return useMutation({
-    mutationFn: (id: number) => {
-      return category_repository.deleteCategory(id);
-    },
-    onMutate: async (id: number) => {
-      await queryClient.cancelQueries({
-        queryKey: [ERevalidateTags.CATEGORIES],
-      });
-      
-      const previousCategories = queryClient.getQueryData([
-        ERevalidateTags.CATEGORIES,
-      ]);
 
-      queryClient.setQueryData(
-        [ERevalidateTags.CATEGORIES],
-        (old: CategoryModel[]) => old.filter((category) => category.id !== id),
-      );
-      
-      return { previousCategories };
+  return useMutation({
+    mutationFn: (category: CategoryDSO) => {
+      return category_repository.addCategory(category);
+    },
+    onMutate: async (category: CategoryDSO) => {
+      return mutate<CategoryModel[]>({
+        queryClient,
+        queryKey: [ERevalidateTags.CATEGORIES],
+        // updateFunction: (old) => [{id: 123, ...category}, ...old] as CategoryModel[],
+        updateFunction: (old) => {
+          const newArray = Array.isArray(old) ? old : [];
+          console.log(newArray);
+          return [{ id: 123, ...category }, ...newArray] as CategoryModel[];
+        },
+      });
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("category cant deleted")));
+      dispatch(errorToast(i18n.t("category_error")));
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
-        context?.previousCategories
+        context?.previousData || []
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("category_remove")));
+      dispatch(successToast(i18n.t("category_success")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
     },
   });
 };
-
 
 export const useEditCategory = () => {
   const queryClient = useQueryClient();
@@ -83,34 +79,39 @@ export const useEditCategory = () => {
   });
 };
 
-export const useAddCategory = () => {
+export const useDeleteCategory = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
 
   return useMutation({
-    mutationFn: (category: CategoryDSO) => {
-      return category_repository.addCategory(category);
+    mutationFn: (id: number) => {
+      return category_repository.deleteCategory(id);
     },
-    onMutate: async (category: CategoryDSO)  => {
-      await queryClient.cancelQueries({ queryKey: [ERevalidateTags.CATEGORIES] });
-      const previousCategories =
-        queryClient.getQueryData<CategoryModel[]>([ERevalidateTags.CATEGORIES]) ||
-        [];
+    onMutate: async (id: number) => {
+      await queryClient.cancelQueries({
+        queryKey: [ERevalidateTags.CATEGORIES],
+      });
+
+      const previousCategories = queryClient.getQueryData([
+        ERevalidateTags.CATEGORIES,
+      ]);
+
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
-        (prev: CategoryModel[]) => [{ id: 1234, ...category }, ...prev]
+        (old: CategoryModel[]) => old.filter((category) => category.id !== id)
       );
+
       return { previousCategories };
     },
     onError: (_error, _variables, context) => {
-      dispatch(errorToast(i18n.t("category_error")));
+      dispatch(errorToast(i18n.t("category cant deleted")));
       queryClient.setQueryData(
         [ERevalidateTags.CATEGORIES],
-        context?.previousCategories || []
+        context?.previousCategories
       );
     },
     onSuccess: (_data, _variables) => {
-      dispatch(successToast(i18n.t("category_success")));
+      dispatch(successToast(i18n.t("category_remove")));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ERevalidateTags.CATEGORIES] });

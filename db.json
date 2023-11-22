@@ -1,23 +1,7 @@
 {
   "products": [
     {
-      "name": "iPhone 24",
-      "description": "no money",
-      "category": "apple",
-      "price": 10,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 1
-    },
-    {
-      "name": "iPhone 19",
-      "description": "no money",
-      "category": "apple",
-      "price": 80000,
-      "image": "https://i.dummyjson.com/data/products/1/1.jpg",
-      "id": 2
-    },
-    {
-      "name": "Samsung",
+      "name": "Samsung 4",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
       "price": 43434,
@@ -25,20 +9,52 @@
       "id": 4
     },
     {
-      "name": "Samsung",
+      "name": "Samsung 3",
       "description": "quia et suscipitsuscipit recusandae consequuntur expedita et cumreprehenderit molestiae ut ut quas totamnostrum rerum est autem sunt rem eveniet architecto",
       "category": "smartphones",
-      "price": 43,
+      "price": 49,
       "image": "https://i.dummyjson.com/data/products/1/1.jpg",
       "id": 5
     },
     {
-      "name": "iPhone 10",
+      "name": "iPhone 10 4",
+      "description": "",
+      "category": "apple",
+      "price": 1,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 6
+    },
+    {
+      "name": "iPhone 10 5",
       "description": "",
       "category": "apple",
       "price": 89,
       "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
-      "id": 6
+      "id": 7
+    },
+    {
+      "name": "deyishdi",
+      "description": "",
+      "category": "apple",
+      "price": 89,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 8
+    },
+    {
+      "name": "iPhone 10 7",
+      "description": "",
+      "category": "apple",
+      "price": 89,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 9
+    },
+    {
+      "name": "iPhone 10 8",
+      "description": "",
+      "category": "apple",
+      "price": 89,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Nokia_3310_Blue_R7309170_%28retouch%29.png",
+      "id": 10
     }
   ],
   "categories": [
@@ -49,10 +65,6 @@
     {
       "id": 2,
       "categoryName": "apple"
-    },
-    {
-      "categoryName": "tests",
-      "id": 5
     }
   ]
 }

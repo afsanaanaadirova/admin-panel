@@ -62,8 +62,13 @@ const AppRoutes = () => {
                   path: ":caregorytId",
                   element: <EditCategory />,
                 },
+              ],
+            },
+            {
+              path: "/addCategory/*",
+              children: [
                 {
-                  path: "addCategory",
+                  index: true,
                   element: <AddCategory />,
                 },
               ],
