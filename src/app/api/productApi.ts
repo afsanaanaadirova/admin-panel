@@ -68,7 +68,6 @@ export const useEditeProduct = () => {
       return product_repository.editProduct(id, product);
     },
     onSuccess: (data) => {
-      console.log(data);
       dispatch(successToast(i18n.t("product_update")));
     },
     onSettled: () => {
@@ -92,7 +91,7 @@ export const useAddProduct = () => {
         // updateFunction: (old) => [{id: 123, ...product}, ...old] as ProductModel[],
         updateFunction: (old) => {
           const newArray = Array.isArray(old) ? old : [];
-          console.log(newArray);
+          // console.log(newArray);
           return [{ id: 123, ...product }, ...newArray] as ProductModel[];
         },
       });

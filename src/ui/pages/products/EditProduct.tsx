@@ -19,7 +19,6 @@ const EditProduct = () => {
   const params = useParams();
   const editproduct = useEditeProduct();
   const { data } = useProduct(Number(params.productId));
-  console.log(data);
   
   let navigate = useNavigate()
   const {

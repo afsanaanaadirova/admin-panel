@@ -15,8 +15,6 @@ function CategoryPage() {
     useCategories();
   const deleteCategory = useDeleteCategory();
 
-  console.log(categoriesData);
-
   const deleteHandler = (id: number) => {
     const categoryToDelete = categoriesData?.find(
       (category) => category.id === id

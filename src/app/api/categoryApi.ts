@@ -41,7 +41,7 @@ export const useAddCategory = () => {
         // updateFunction: (old) => [{id: 123, ...category}, ...old] as CategoryModel[],
         updateFunction: (old) => {
           const newArray = Array.isArray(old) ? old : [];
-          console.log(newArray);
+          // console.log(newArray);
           return [{ id: 123, ...category }, ...newArray] as CategoryModel[];
         },
       });
@@ -70,7 +70,6 @@ export const useEditCategory = () => {
       return category_repository.editCategory(id, category);
     },
     onSuccess: (data) => {
-      console.log(data);
       dispatch(successToast(i18n.t("category_update")));
     },
     onSettled: () => {
