@@ -7,15 +7,23 @@ import { Controller, useForm } from "react-hook-form";
 import Option from "@/ui/shared/Select/Option";
 import { addProductSchema } from "@/data/schemas/formValidations/addProductSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddProduct } from "@/app/api/productApi";
+import {
+  useAddProduct,
+  useEditeProduct,
+  useProduct,
+} from "@/app/api/productApi";
 import { ProductDSO } from "@/data/dso/product.dso";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
-const AddProduct = () => {
+const ProductForm = () => {
   const { data: categoriesData } = useCategories();
   const addProduct = useAddProduct();
-  let navigate = useNavigate()
-  
+  let navigate = useNavigate();
+
+  const params = useParams();
+  const editproduct = useEditeProduct();
+  const { data: product } = useProduct(Number(params.productId));
   const {
     register,
     handleSubmit,
@@ -25,16 +33,32 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<ProductDSO>({
     resolver: zodResolver(addProductSchema),
+    values: {
+      name: product?.name || "",
+      description: product?.description || "",
+      category: product?.category || "null",
+      image: product?.image || "",
+      price: product?.price || 0,
+    },
   });
+
 
   const submitHandler = async (data: ProductDSO) => {
     const output = await trigger();
-    output && addProduct.mutate(data);
-    data ? navigate('/products'):""
+
+    const productData = {
+      id: Number(params.productId),
+      product: data,
+    };
+
+    product
+      ? editproduct.mutate(productData)
+      : output && addProduct.mutate(data);
+
+    data ? navigate("/products") : "";
     reset({ name: "", description: "", category: "", image: "", price: 0 });
   };
 
-  
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -102,7 +126,7 @@ const AddProduct = () => {
             </div>
             <div className="flex justify-center mt-4">
               <Button variant={EButtonVariants.BORDERLINE}>
-                add
+                {product ? "edit" : "add"}
               </Button>
             </div>
           </form>
@@ -112,4 +136,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default ProductForm;

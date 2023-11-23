@@ -10,7 +10,12 @@ const Pagination = ({
   return (
     <ul className="flex justify-center py-6 gap-x-6">
       <li>
-        <a href="#" onClick={() => onPageChange(currentPage! - 1)}>
+        <a
+          href="#"
+          onClick={() =>
+            currentPage !== 1 ? onPageChange(currentPage! - 1) : ""
+          }
+        >
           prev
         </a>
       </li>
@@ -22,7 +27,12 @@ const Pagination = ({
         </li>
       ))}
       <li>
-        <a href="#" onClick={() => onPageChange(currentPage! + 1)}>
+        <a
+          href="#"
+          onClick={() =>
+            currentPage !== totalPages ? onPageChange(currentPage! + 1) : ""
+          }
+        >
           next
         </a>
       </li>

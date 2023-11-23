@@ -1,31 +1,47 @@
-import { useAddCategory } from "@/app/api/categoryApi";
+import {
+  useAddCategory,
+  useCategory,
+  useEditCategory,
+} from "@/app/api/categoryApi";
 import { EButtonVariants } from "@/data/enum/button.enum";
 import Button from "@/ui/shared/Button";
 import Input from "@/ui/shared/Input";
-import {  useForm } from "react-hook-form";
-import { useNavigate} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { CategoryDSO } from "@/data/dso/category.dos";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addCategorySchema } from "@/data/schemas/formValidations/addCategorySchema";
-import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
 
-const AddCategory = () => {
-  const { mutate,isSuccess } = useAddCategory();;
-  let navigate = useNavigate()
-  
+const CategoryForm = () => {
+  const { mutate, isSuccess } = useAddCategory();
+  let navigate = useNavigate();
+
+  const params = useParams();
+  const editCategory = useEditCategory();
+  const { data: category } = useCategory(Number(params.caregorytId));
 
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm<CategoryDSO>({
     resolver: zodResolver(addCategorySchema),
+    values: {
+      categoryName: category?.name || "",
+    },
   });
 
-const submitHandler = async (data: CategoryDSO) => {
-  await mutate(data);
-  navigate('/categories')
-};
+  const submitHandler = async (data: CategoryDSO) => {
+    const output = await trigger();
+    const categoryData = {
+      id: Number(params.caregorytId),
+      category: data,
+    };
+    
+    category ? editCategory.mutate(categoryData) : output && mutate(data);
+    data ? navigate("/categories") : "";
+  };
 
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
@@ -44,7 +60,7 @@ const submitHandler = async (data: CategoryDSO) => {
             </div>
             <div className="flex justify-center mt-4">
               <Button variant={EButtonVariants.BORDERLINE}>
-                add
+                {category ? "edit" : "add"}
               </Button>
             </div>
           </form>
@@ -54,8 +70,4 @@ const submitHandler = async (data: CategoryDSO) => {
   );
 };
 
-export default AddCategory;
-function trigger() {
-  throw new Error("Function not implemented.");
-}
-
+export default CategoryForm;

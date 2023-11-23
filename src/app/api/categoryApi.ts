@@ -34,24 +34,8 @@ export const useAddCategory = () => {
     mutationFn: (category: CategoryDSO) => {
       return category_repository.addCategory(category);
     },
-    onMutate: async (category: CategoryDSO) => {
-      return mutate<CategoryModel[]>({
-        queryClient,
-        queryKey: [ERevalidateTags.CATEGORIES],
-        // updateFunction: (old) => [{id: 123, ...category}, ...old] as CategoryModel[],
-        updateFunction: (old) => {
-          const newArray = Array.isArray(old) ? old : [];
-          // console.log(newArray);
-          return [{ id: 123, ...category }, ...newArray] as CategoryModel[];
-        },
-      });
-    },
-    onError: (_error, _variables, context) => {
+    onError: (_error, _variables) => {
       dispatch(errorToast(i18n.t("category_error")));
-      queryClient.setQueryData(
-        [ERevalidateTags.CATEGORIES],
-        context?.previousData || []
-      );
     },
     onSuccess: (_data, _variables) => {
       dispatch(successToast(i18n.t("category_success")));

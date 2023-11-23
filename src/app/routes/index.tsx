@@ -3,11 +3,9 @@ import NotFound from "@/ui/pages/common/NotFound";
 import AuthProtectedRoute from "@/app/routes/auth-protected-route";
 import MainLayout from "@/ui/layout/MainLayout";
 import { lazy } from "react";
-import AddProduct from "@/ui/pages/products/AddProduct";
-import EditProduct from "@/ui/pages/products/EditProduct";
-import EditCategory from "@/ui/pages/category/EditCategory";
-import AddCategory from "@/ui/pages/category/AddCategory";
 import Home from "@/ui/pages/home/home";
+import ProductForm from "@/ui/containers/ProductForm";
+import CategoryForm from "@/ui/containers/CategoryForm";
 
 const LoginPage = lazy(() => import("@/ui/pages/auth/LoginPage"));
 const ProductsPage = lazy(() => import("@/ui/pages/products/ProductsPage"));
@@ -38,7 +36,7 @@ const AppRoutes = () => {
                 },
                 {
                   path: ":productId",
-                  element: <EditProduct />,
+                  element: <ProductForm />,
                 },
               ],
             },
@@ -47,7 +45,7 @@ const AppRoutes = () => {
               children: [
                 {
                   index: true,
-                  element: <AddProduct />,
+                  element: <ProductForm />,
                 },
               ],
             },
@@ -60,7 +58,7 @@ const AppRoutes = () => {
                 },
                 {
                   path: ":caregorytId",
-                  element: <EditCategory />,
+                  element: <CategoryForm />,
                 },
               ],
             },
@@ -69,7 +67,7 @@ const AppRoutes = () => {
               children: [
                 {
                   index: true,
-                  element: <AddCategory />,
+                  element: <CategoryForm />,
                 },
               ],
             },

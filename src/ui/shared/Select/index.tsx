@@ -4,7 +4,7 @@ import UpChevronSVG from "@svg/up_chevron.svg?react";
 import { type SelectType } from "./select";
 import { BaseSelect } from "@/data/types/base_select";
 import { useUpdateEffect } from "@/app/hooks/useUpdateEffect";
-import { Link } from "react-router-dom";
+
 
 const Select = ({
   data,
@@ -16,6 +16,7 @@ const Select = ({
 }: SelectType) => {
   const newVal = (value === undefined || value === null) ? { id: null, name: "" } : typeof value === "number" ? data.find((d) => d.id === value) as BaseSelect : value
   const [innerValue, setInnerValue] = useState<any>(newVal);
+  
 
   useUpdateEffect(() => {
     value === null && setInnerValue({ id: null, name: "" })

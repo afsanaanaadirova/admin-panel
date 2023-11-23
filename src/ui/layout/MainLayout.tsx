@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Header from "@/ui/containers/Header";
 import { Suspense } from "react";
 import Sidebar from "./sidebar/Sidebar";
 

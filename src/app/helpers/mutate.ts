@@ -8,5 +8,7 @@ export const mutate = async <T>({
     await queryClient.cancelQueries({ queryKey });
     const previousData = queryClient.getQueryData<T>(queryKey)!;
     queryClient.setQueryData<T>(queryKey, updateFunction(previousData));
+    console.log("previousData",previousData);
+    
     return { previousData };
   };

@@ -23,6 +23,7 @@ const ProductsPage = () => {
   const [filterPrice, setFilterPrice] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
 
+
   //pagination
   const [curretPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
@@ -35,7 +36,6 @@ const ProductsPage = () => {
   function changeCPage(id: any): void {
     setCurrentPage(id);
   }
-
   //filter
   useUpdateEffect(() => {
     const params = new URLSearchParams();
